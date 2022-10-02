@@ -1,8 +1,8 @@
 
 const twitch = require('simple-twitch-api')
 const SCOPES = "user:read:email";
-let CLIENT_ID = process.env.CLIENT_ID;
-let CLIENT_SECRET = process.env.CLIENT_SECRET;
+let CLIENT_ID = process.env.TWITCH_CLIENT_ID;
+let CLIENT_SECRET = process.env.TWITCH_CLIENT_SECRET;
 
 async function get_twitch(user) {
     const request = await twitch.getToken(CLIENT_ID, CLIENT_SECRET, SCOPES);

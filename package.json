@@ -13,9 +13,11 @@
   "dependencies": {
     "@discordjs/rest": "^1.1.0",
     "@fastify/formbody": "^7.1.0",
+    "axios": "^0.27.2",
     "discord-api-types": "^0.37.5",
     "dotenv": "^16.0.2",
     "fastify": "^4.5.3",
+    "minecraft-query": "^1.0.13",
     "nodemon": "^2.0.19",
     "pino-pretty": "^9.1.0",
     "simple-twitch-api": "^2.1.1"
