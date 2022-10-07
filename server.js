@@ -24,6 +24,8 @@ const fastify = require('fastify')({
       }
     }
   });
+const cors = require('@fastify/cors')
+
 
 const get_twitch = require('./services/twitch')
 const get_discord = require('./services/discord')
@@ -31,6 +33,20 @@ const get_server = require('./services/mc')
 const get_trovo = require('./services/trovo')
 
 fastify.register(require("@fastify/formbody"));
+
+await fastify.register(cors, {
+  origin: (origin, cb) => {
+    const hostname = new URL(origin).hostname
+    if(hostname === "https://curly.team"){
+      //  Request from localhost will pass
+      cb(null, true)
+      return
+    }
+    // Generate an error on other origins, disabling access
+    cb(new Error("Not allowed"), false)
+  }
+})
+
 
 fastify.get('/twitch/:user', async (req, reply) => {
   let user = req.query.user;
