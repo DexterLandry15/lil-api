@@ -5,6 +5,7 @@ let CLIENT_ID = process.env.TWITCH_CLIENT_ID;
 let CLIENT_SECRET = process.env.TWITCH_CLIENT_SECRET;
 
 async function get_twitch(user) {
+    user = [];
     const request = await twitch.getToken(CLIENT_ID, CLIENT_SECRET, SCOPES);
 
     const token = request.access_token;

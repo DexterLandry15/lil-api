@@ -1,7 +1,7 @@
 const path = require("path");
 require('dotenv').config()
 const fastify = require('fastify')({
-    logger: {
+/*     logger: {
       transport: {
         target: 'pino-pretty'
       },
@@ -22,7 +22,7 @@ const fastify = require('fastify')({
           };
         }
       }
-    }
+    } */
   });
 const cors = require('@fastify/cors')
 
@@ -51,9 +51,12 @@ fastify.register(require('@fastify/cors'), (instance) => {
   }
 })
 
-
+//TODO: get arr of streamers
 fastify.get('/twitch/:user', async (req, reply) => {
-  let user = req.query.user;
+  let user = [];
+  user.push(req.query.user);
+  let data = user.split(/,/)
+  console.log(data)
   let info = await get_twitch(user)
 
     reply.send(info);
@@ -86,7 +89,7 @@ fastify.get('/mc', async (req, reply) => {
 fastify.post('/', (req, reply) => {
     reply.send(req.body)
   })
-
-  fastify.listen({ host: '185.189.12.64', port: 80 }, (err) => {
+//host: '185.189.12.64'
+  fastify.listen({ port: 80 }, (err) => {
     if (err) throw err
   })
