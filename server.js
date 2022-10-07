@@ -34,16 +34,20 @@ const get_trovo = require('./services/trovo')
 
 fastify.register(require("@fastify/formbody"));
 
-await fastify.register(cors, {
-  origin: (origin, cb) => {
-    const hostname = new URL(origin).hostname
-    if(hostname === "https://curly.team"){
-      //  Request from localhost will pass
-      cb(null, true)
-      return
+fastify.register(require('@fastify/cors'), (instance) => {
+  return (req, callback) => {
+    const corsOptions = {
+      // This is NOT recommended for production as it enables reflection exploits
+      origin: true
+    };
+
+    // do not include CORS headers for requests from localhost
+    if (/^localhost$/m.test(req.headers.origin)) {
+      corsOptions.origin = false
     }
-    // Generate an error on other origins, disabling access
-    cb(new Error("Not allowed"), false)
+
+    // callback expects two parameters: error and options
+    callback(null, corsOptions)
   }
 })
 
@@ -83,6 +87,6 @@ fastify.post('/', (req, reply) => {
     reply.send(req.body)
   })
 
-  fastify.listen({ port: 8000 }, (err) => {
+  fastify.listen({ port: 80 }, (err) => {
     if (err) throw err
   })
