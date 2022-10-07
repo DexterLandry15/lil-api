@@ -87,6 +87,6 @@ fastify.post('/', (req, reply) => {
     reply.send(req.body)
   })
 
-  fastify.listen({ port: 80 }, (err) => {
+  fastify.listen({ host: '185.189.12.64', port: 80 }, (err) => {
     if (err) throw err
   })
