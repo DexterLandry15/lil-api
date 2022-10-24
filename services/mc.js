@@ -1,15 +1,16 @@
 const Query = require("minecraft-query");
 
-const q = new Query({host: '127.0.0.1', port: 25565, timeout: 7500});
-
+const q = new Query({ host: "94.130.52.204", port: 45689, timeout: 1000 });
 
 async function get_server() {
-    q.fullStat()
-  .then(success => {
-
-    return success;
-    q.close();
-  })
-
+	let data;
+	await q.fullStat()
+		.then((res) => {
+			data = res;
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+	return data;
 }
-module.exports = get_server
+module.exports = get_server;

@@ -51,12 +51,9 @@ fastify.register(require('@fastify/cors'), (instance) => {
   }
 })
 
-//TODO: get arr of streamers
+
 fastify.get('/twitch/:user', async (req, reply) => {
-  let user = [];
-  user.push(req.query.user);
-  let data = user.split(/,/)
-  console.log(data)
+  let user = req.query.user;
   let info = await get_twitch(user)
 
     reply.send(info);
@@ -78,7 +75,6 @@ fastify.get('/discord/:user_id', async (req, reply) => {
 });
 
 fastify.get('/mc', async (req, reply) => {
-  let user_id = req.query.user_id;
   let info = await get_server()
 
   reply.send(info);
@@ -90,6 +86,6 @@ fastify.post('/', (req, reply) => {
     reply.send(req.body)
   })
 //host: '185.189.12.64'
-  fastify.listen({ port: 80 }, (err) => {
+  fastify.listen({ port: 81 }, (err) => {
     if (err) throw err
   })
