@@ -85,7 +85,7 @@ fastify.get('/mc', async (req, reply) => {
 fastify.post('/', (req, reply) => {
     reply.send(req.body)
   })
-//host: '185.189.12.64'
-  fastify.listen({ port: 81 }, (err) => {
+//
+  fastify.listen({ host: '185.189.12.64', port: 80 }, (err) => {
     if (err) throw err
   })
